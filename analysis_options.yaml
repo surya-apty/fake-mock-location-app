@@ -1,0 +1,91 @@
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    # Prefer const constructors
+    prefer_const_constructors: true
+    prefer_const_literals_to_create_immutables: true
+    
+    # Prefer const declarations
+    prefer_const_declarations: true
+    
+    # Avoid unnecessary containers
+    avoid_unnecessary_containers: true
+    
+    # Prefer sized box over container
+    prefer_sized_box: true
+    
+    # Avoid print statements
+    avoid_print: true
+    
+    # Prefer single quotes
+    prefer_single_quotes: true
+    
+    # Sort imports
+    sort_child_properties_last: true
+    
+    # Use key in widget constructors
+    use_key_in_widget_constructors: true
+    
+    # Avoid empty containers
+    avoid_empty_else: true
+    
+    # Prefer final fields
+    prefer_final_fields: true
+    
+    # Prefer final locals
+    prefer_final_locals: true
+    
+    # Avoid unnecessary null checks
+    avoid_unnecessary_null_checks: true
+    
+    # Prefer conditional expressions
+    prefer_conditional_expressions: true
+    
+    # Prefer collection literals
+    prefer_collection_literals: true
+    
+    # Prefer expression function bodies
+    prefer_expression_function_bodies: true
+    
+    # Prefer initializing formal parameters
+    prefer_initializing_formals: true
+    
+    # Prefer is empty
+    prefer_is_empty: true
+    
+    # Prefer is not empty
+    prefer_is_not_empty: true
+    
+    # Prefer iterable where type
+    prefer_iterable_where_type: true
+    
+    # Prefer match file name
+    prefer_match_file_name: true
+    
+    # Prefer relative imports
+    prefer_relative_imports: true
+    
+    # Prefer spread collections
+    prefer_spread_collections: true
+    
+    # Prefer void to null
+    prefer_void_to_null: true
+
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    - "**/generated_plugin_registrant.dart"
+  
+  errors:
+    # Treat missing required parameters as a warning (not a hint)
+    missing_required_param: warning
+    # Treat missing returns as a warning (not a hint)
+    missing_return: warning
+    # Allow having TODOs in the code
+    todo: ignore
+    # Allow having unused imports
+    unused_import: warning
+    # Allow having unused elements
+    unused_element: warning 

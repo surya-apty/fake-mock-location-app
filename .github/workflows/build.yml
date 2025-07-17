@@ -1,0 +1,69 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  release:
+    types: [ published ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+      
+    - name: Build release APK
+      run: |
+        # Build the Docker image
+        docker build -t mock-gps-location-app .
+        
+        # Create container and extract APK
+        docker create --name build-container mock-gps-location-app
+        mkdir -p build/outputs
+        docker cp build-container:/app/build/app/outputs/flutter-apk/app-release.apk build/outputs/mock-gps-location-app.apk
+        docker rm build-container
+        
+    - name: Build debug APK
+      run: |
+        # Create temporary Dockerfile for debug build
+        cat > Dockerfile.debug << EOF
+        FROM cirrusci/flutter:latest
+        WORKDIR /app
+        COPY pubspec.* ./
+        RUN flutter pub get
+        COPY . .
+        RUN flutter build apk --debug
+        EOF
+        
+        # Build debug APK
+        docker build -f Dockerfile.debug -t mock-gps-location-app-debug .
+        docker create --name build-container-debug mock-gps-location-app-debug
+        docker cp build-container-debug:/app/build/app/outputs/flutter-apk/app-debug.apk build/outputs/mock-gps-location-app-debug.apk
+        docker rm build-container-debug
+        rm Dockerfile.debug
+        
+    - name: Upload APK artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: android-apks
+        path: build/outputs/
+        retention-days: 30
+        
+    - name: Create release
+      if: github.event_name == 'release'
+      run: |
+        # This step would create a GitHub release with the APK
+        # You can customize this based on your needs
+        echo "Release APK built successfully"
+        
+    - name: Clean up Docker images
+      if: always()
+      run: |
+        docker rmi mock-gps-location-app mock-gps-location-app-debug || true 

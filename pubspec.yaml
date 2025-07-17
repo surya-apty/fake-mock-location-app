@@ -1,0 +1,55 @@
+name: mock_gps_location_app
+description: A Flutter app for mocking GPS location on Android devices.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  # Maps and Location
+  google_maps_flutter: ^2.5.3
+  geolocator: ^10.1.0
+  location: ^5.0.3
+  
+  # State Management
+  provider: ^6.1.1
+  
+  # Persistence
+  shared_preferences: ^2.2.2
+  sqflite: ^2.3.0
+  
+  # Background Services
+  flutter_background_service: ^5.0.5
+  flutter_background_service_android: ^6.2.2
+  
+  # UI Components
+  cupertino_icons: ^1.0.2
+  flutter_svg: ^2.0.9
+  permission_handler: ^11.1.0
+  
+  # Utilities
+  intl: ^0.19.0
+  uuid: ^4.2.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+  
+  assets:
+    - assets/images/
+    - assets/icons/
+  
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto-Regular.ttf
+        - asset: assets/fonts/Roboto-Bold.ttf
+          weight: 700 
