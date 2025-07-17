@@ -74,7 +74,7 @@ build_app() {
     
     # Build Docker image
     print_status "Building Docker image..."
-    docker build -t $image_name . || {
+    docker build -f Dockerfile.simple -t $image_name . || {
         print_error "Failed to build Docker image"
         exit 1
     }
@@ -107,8 +107,8 @@ build_debug() {
     
     # Create a temporary Dockerfile for debug build
     cat > Dockerfile.debug << EOF
-# Use the official Flutter image (includes Flutter SDK & Android SDK)
-FROM cirrusci/flutter:latest
+# Use a more recent Flutter image with Dart SDK 3.0+
+FROM ghcr.io/cirruslabs/flutter:3.16.5
 
 # Set working directory
 WORKDIR /app

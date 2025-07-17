@@ -1,0 +1,17 @@
+# Use a more recent Flutter image with Dart SDK 3.0+
+FROM ghcr.io/cirruslabs/flutter:3.16.5
+
+# Set working directory
+WORKDIR /app
+
+# Copy pubspec files and get dependencies early
+COPY pubspec.* ./
+RUN flutter pub get
+
+# Copy the rest of the app source
+COPY . .
+
+# Run flutter build for release APK
+RUN flutter build apk --release
+
+# Output APK will be in build/app/outputs/flutter-apk/ 

@@ -35,7 +35,7 @@ build-debug:
 # Docker commands
 docker-build:
 	@echo "Building Docker image..."
-	@docker build -t mock-gps-location-app .
+	@docker build -f Dockerfile.simple -t mock-gps-location-app .
 
 docker-clean:
 	@echo "Cleaning Docker images..."
